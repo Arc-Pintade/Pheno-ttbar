@@ -164,15 +164,15 @@ int main(){
         TH1F* hTEVXZ = TEV.useHistoD0("TEV", "XZ", cmunu, time, step, kGreen);
         TH1F* hTEVYZ = TEV.useHistoD0("TEV", "YZ", cmunu, time, step, kGreen);
 
-        fatHisto("blablaXX", h13XX, h7XX, h2XX, hTEVXX);
-        fatHisto("blablaXY", h13XY, h7XY, h2XY, hTEVXY);
-        fatHisto("blablaXZ", h13XZ, h7XZ, h2XZ, hTEVXZ);
-        fatHisto("blablaYZ", h13YZ, h7YZ, h2YZ, hTEVYZ);
+        FunctionAnalyze::fatHisto("f^{XX}", h13XX, h7XX, h2XX, hTEVXX);
+        FunctionAnalyze::fatHisto("f^{XY}", h13XY, h7XY, h2XY, hTEVXY);
+        FunctionAnalyze::fatHisto("f^{XZ}", h13XZ, h7XZ, h2XZ, hTEVXZ);
+        FunctionAnalyze::fatHisto("f^{YZ}", h13YZ, h7YZ, h2YZ, hTEVYZ);
 
-        amplEnergy("F", LHC2TeV.getAverageF(), LHC7TeV.getAverageF(), LHC13TeV.getAverageF(), TEV.getAverageF());
-        amplEnergy("Pqqbar", LHC2TeV.getAveragePqqbar(), LHC7TeV.getAveragePqqbar(), LHC13TeV.getAveragePqqbar(), TEV.getAveragePqqbar());
-        amplEnergy("P2g", LHC2TeV.getAverageP2g(), LHC7TeV.getAverageP2g(), LHC13TeV.getAverageP2g(), TEV.getAverageP2g());
-        amplEnergy("A", LHC2TeV.getAverageA(), LHC7TeV.getAverageA(), LHC13TeV.getAverageA(), TEV.getAverageAD0());
+        FunctionAnalyze::amplEnergy(" decay", LHC2TeV.getAverageF(), LHC7TeV.getAverageF(), LHC13TeV.getAverageF(), TEV.getAverageF());
+        FunctionAnalyze::amplEnergy(" q#bar{q}", LHC2TeV.getAveragePqqbar(), LHC7TeV.getAveragePqqbar(), LHC13TeV.getAveragePqqbar(), TEV.getAveragePqqbar());
+        FunctionAnalyze::amplEnergy(" gluglu", LHC2TeV.getAverageP2g(), LHC7TeV.getAverageP2g(), LHC13TeV.getAverageP2g(), TEV.getAverageP2g());
+        FunctionAnalyze::amplEnergy("", LHC2TeV.getAverageA(), LHC7TeV.getAverageA(), LHC13TeV.getAverageA(), TEV.getAverageAD0());
 
         cout<<endl;
         cout<<"LHC2Tev a1-a2 : "<<LHC2TeV.geta1()-LHC2TeV.geta2()<<endl;
@@ -204,44 +204,4 @@ int main(){
 }
 
 #endif
-
-/*
-//__________________ essaie ____________________//
-
-    int n = 3;
-    double bkgd = 2*24;
-    double TTbarSM = 5*24;
-
-    Analyze Essaie(n, "data/essaiePqqbar.txt", "data/essaieP2g.txt", "data/essaieF.txt");
-
-    Essaie.quadriHisto("essaie", cmunu, time);
-
-    showMatrix(Essaie.getAverageF());
-    showMatrix(Essaie.getAveragePqqbar());
-
-    writeNumMatrix("essaie1", Essaie.getnF(), Essaie.getAverageF());
-    writeNumMatrix("essaie2", Essaie.getnPqqbar(), Essaie.getAveragePqqbar());
-
-    TMatrixD es1 = readMatrix("data/matrix/essaie1.txt");
-    showMatrix(es1);
-    TMatrixD es2 = readMatrix("data/matrix/essaie2.txt");
-    showMatrix(es2);
-    int n1 = readNumber("data/matrix/essaie1.txt");
-    cout<<"n1 = "<<n1<<endl;
-    int n2 = readNumber("data/matrix/essaie2.txt");
-    cout<<"n2 = "<<n2<<endl;
-
-    app.Run();
-    f->Write();
-    f->Close();
-    return 0;
-//Bye.
-
-}
-
-#endif
-*/
-
-
-
 

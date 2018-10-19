@@ -15,8 +15,6 @@
 using namespace std;
 
 void showMatrix(TMatrixD m);
-void amplEnergy(TString s, TMatrixD m1, TMatrixD m2, TMatrixD m3, TMatrixD mT);
-void fatHisto(TString s, TH1F* h1, TH1F* h2, TH1F* h3, TH1F* h4);
 
 //**********************************************************************************//
 //****************************** class Analyze declaration *************************//
@@ -137,6 +135,9 @@ class FunctionAnalyze {
         TH1F* useHisto(TString s, TString XX, double cmunu, int maxTime, int timeStep, Color_t color);
         TH1F* useHistoD0(TString s, TString XX, double cmunu, int maxTime, int timeStep, Color_t color);
 
+// Energy comparaison
+        static void amplEnergy(TString s, TMatrixD m1, TMatrixD m2, TMatrixD m3, TMatrixD mT);
+        static void fatHisto(TString s, TH1F* h1, TH1F* h2, TH1F* h3, TH1F* h4);
 };
 
 

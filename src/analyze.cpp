@@ -23,55 +23,6 @@ void showMatrix(TMatrixD m){
     cout<<endl;
 }
 
-void amplEnergy(TString s, TMatrixD m1, TMatrixD m2, TMatrixD m3, TMatrixD mT){
-    TCanvas* w = new TCanvas("Amplitude = f(Energy)"+s,"",200,10,800,600);
-    TH1F* h1 = new TH1F("A_{ZZ}"+s,"", 15, 0, 15);
-    TH1F* h2 = new TH1F("A_{XX}"+s,"", 15, 0, 15);
-
-    h1->SetBinContent(1, -mT(3,3));
-    h1->SetBinContent(2,-m1(3,3));
-    h1->SetBinContent(7,-m2(3,3));
-    h1->SetBinContent(13,-m3(3,3));
-    h2->SetBinContent(1, -mT(0,0));
-    h2->SetBinContent(2,-m1(0,0));
-    h2->SetBinContent(7,-m2(0,0));
-    h2->SetBinContent(13,-m3(0,0));
-
-    h1->Draw("*L");
-    h2->Draw("*L SAME");
-
-    h1->GetYaxis()->SetTitle("A^{#mu #nu}");
-    h1->GetXaxis()->SetTitle("Energy beam (in TeV)");
-
-    h1->SetStats(0);
-
-    h1->Write();   h1->SetLineWidth(2);   h1->SetLineColor(kRed);
-    h2->Write();   h2->SetLineWidth(2);   h2->SetLineColor(kBlue);
-
-    w->Update();
-    w->BuildLegend();
-}
-
-void fatHisto(TString s, TH1F* h1, TH1F* h2, TH1F* h3, TH1F* h4){
-    TCanvas* w = new TCanvas("fatHisto"+s,"",200,10,800,600);
-    h1->Draw();
-    h2->Draw("SAME");
-    h3->Draw("SAME");
-    h4->Draw("SAME");
-
-    h1->SetStats(0);
-
-    w->Update();
-
-    TLegend* legend = new TLegend(0.1,0.7,0.48,0.9);
-    legend->SetHeader("f_{SME}(t) functions histogram "+s,"C"); // option "C" allows to center the header
-    legend->AddEntry(h1,"c_{XX} = - c_{YY}","l"); // option "l" is for line (form of legend)
-    legend->AddEntry(h2,"c_{XY} = c_{YX}","l");
-    legend->AddEntry(h3,"c_{XZ} = c_{ZX}","l");
-    legend->AddEntry(h4,"c_{YZ} = c_{ZY}","l");
-    legend->Draw();
-}
-
 //**********************************************************************************//
 //************************* class EventsAnalyze definition *************************//
 //**********************************************************************************//
@@ -575,4 +526,54 @@ TH1F* FunctionAnalyze::useHistoD0(TString s, TString XX, double cmunu, int maxTi
     return foo;
 }
 
+//________________ statics functions _________________//
+
+void FunctionAnalyze::amplEnergy(TString s, TMatrixD m1, TMatrixD m2, TMatrixD m3, TMatrixD mT){
+    TCanvas* w = new TCanvas("Amplitude = f(Energy)"+s,"",200,10,800,600);
+    TH1F* h1 = new TH1F("A^{ZZ}"+s,"", 15, 0, 15);
+    TH1F* h2 = new TH1F("A^{XX}"+s,"", 15, 0, 15);
+
+    h1->SetBinContent(1, -mT(3,3));
+    h1->SetBinContent(2,-m1(3,3));
+    h1->SetBinContent(7,-m2(3,3));
+    h1->SetBinContent(13,-m3(3,3));
+    h2->SetBinContent(1, -mT(0,0));
+    h2->SetBinContent(2,-m1(0,0));
+    h2->SetBinContent(7,-m2(0,0));
+    h2->SetBinContent(13,-m3(0,0));
+
+    h1->Draw("");
+    h2->Draw("SAME");
+
+    h1->GetYaxis()->SetTitle("A^{#mu #nu}");
+    h1->GetXaxis()->SetTitle("Energy beam (in TeV)");
+
+    h1->SetStats(0);
+
+    h1->Write();   h1->SetLineWidth(2);   h1->SetLineColor(kRed);
+    h2->Write();   h2->SetLineWidth(2);   h2->SetLineColor(kBlue);
+
+    w->Update();
+    w->BuildLegend();
+}
+
+void FunctionAnalyze::fatHisto(TString s, TH1F* h1, TH1F* h2, TH1F* h3, TH1F* h4){
+    TCanvas* w = new TCanvas("fatHisto"+s,"",200,10,800,600);
+    h1->Draw();
+    h2->Draw("SAME");
+    h3->Draw("SAME");
+    h4->Draw("SAME");
+
+    h1->SetStats(0);
+
+    w->Update();
+
+    TLegend* legend = new TLegend(0.1,0.7,0.48,0.9);
+    legend->SetHeader("f_{SME}(t) functions histogram "+s,"C"); // option "C" allows to center the header
+    legend->AddEntry(h1,"LHC 13TeV ","l"); // option "l" is for line (form of legend)
+    legend->AddEntry(h2,"LHC 7TeV ","l");
+    legend->AddEntry(h3,"LHC 2TeV ","l");
+    legend->AddEntry(h4,"Tevatron ","l");
+    legend->Draw();
+}
 
