@@ -230,15 +230,15 @@ double FunctionAnalyze::calculateCoefficent(int i, TMatrixD m){
     double foo = 0;
 
     if(i==1)
-        foo = (s1*s1*s2*s2 + c1*c1) * m(0,0) + (s1*s1*c2*c2) * m(3,3);
+        foo = (s1*s1*s2*s2 + c1*c1) * m(0,0) + (s1*s1*c2*c2) * m(2,2);
     else if(i==2)
-        foo = (c2*c2) * m(0,0) + (s2*s2) * m(3,3);
+        foo = (c2*c2) * m(0,0) + (s2*s2) * m(2,2);
     else if(i==3)
-        foo = (s1*c2*s2) * (m(3,3) - m(0,0));
+        foo = (s1*c2*s2) * (m(2,2) - m(0,0));
     else if(i==4)
-        foo = (c1*s1*c2*c2) * (m(3,3) - m(0,0));
+        foo = (c1*s1*c2*c2) * (m(2,2) - m(0,0));
     else if(i==5)
-        foo = (c2*c1*s2) * (m(3,3) - m(0,0));
+        foo = (c2*c1*s2) * (m(2,2) - m(0,0));
     else{
         cout<<"error with coefficient"<<endl;
     }
@@ -249,15 +249,15 @@ double FunctionAnalyze::calculateCoefficentD0(int i, TMatrixD m){
     double foo = 0;
 
     if(i==1)
-        foo = (c1D0*c1D0*c2D0*c2D0 + s1D0*s1D0) * m(0,0) + (c1D0*c1D0*s2D0*s2D0) * m(3,3);
+        foo = (c1D0*c1D0*c2D0*c2D0 + s1D0*s1D0) * m(0,0) + (c1D0*c1D0*s2D0*s2D0) * m(2,2);
     else if(i==2)
-        foo = (s2D0*s2D0) * m(0,0) + (c2D0*c2D0) * m(3,3);
+        foo = (s2D0*s2D0) * m(0,0) + (c2D0*c2D0) * m(2,2);
     else if(i==3)
-        foo = (c1D0*c2D0*s2D0) * (m(3,3) - m(0,0));
+        foo = (c1D0*c2D0*s2D0) * (m(2,2) - m(0,0));
     else if(i==4)
-        foo = (c1D0*s1D0*s2D0*s2D0) * (m(0,0) + m(3,3));
+        foo = (c1D0*s1D0*s2D0*s2D0) * (m(0,0) + m(2,2));
     else if(i==5)
-        foo = (c2D0*s1D0*s2D0) * (m(0,0) - m(3,3));
+        foo = (c2D0*s1D0*s2D0) * (m(0,0) - m(2,2));
     else{
         cout<<"error with coefficient"<<endl;
     }
@@ -533,10 +533,10 @@ void FunctionAnalyze::amplEnergy(TString s, TMatrixD m1, TMatrixD m2, TMatrixD m
     TH1F* h1 = new TH1F("A^{ZZ}"+s,"", 15, 0, 15);
     TH1F* h2 = new TH1F("A^{XX}"+s,"", 15, 0, 15);
 
-    h1->SetBinContent(1, -mT(3,3));
-    h1->SetBinContent(2,-m1(3,3));
-    h1->SetBinContent(7,-m2(3,3));
-    h1->SetBinContent(13,-m3(3,3));
+    h1->SetBinContent(1, -mT(2,2));
+    h1->SetBinContent(2,-m1(2,2));
+    h1->SetBinContent(7,-m2(2,2));
+    h1->SetBinContent(13,-m3(2,2));
     h2->SetBinContent(1, -mT(0,0));
     h2->SetBinContent(2,-m1(0,0));
     h2->SetBinContent(7,-m2(0,0));
