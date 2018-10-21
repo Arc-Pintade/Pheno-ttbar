@@ -175,17 +175,25 @@ int main(){
         FunctionAnalyze::amplEnergy("", LHC2TeV.getAverageA(), LHC7TeV.getAverageA(), LHC13TeV.getAverageA(), TEV.getAverageAD0());
 
         cout<<endl;
-        cout<<"LHC2Tev a1-a2 : "<<LHC2TeV.geta1()-LHC2TeV.geta2()<<endl;
-        cout<<"TEV     a1-a2 : "<<TEV.geta1D0()-TEV.geta2D0()<<endl;
+        cout<<"LHC13Tev a1-a2 : "<<LHC13TeV.geta1()-LHC13TeV.geta2()<<endl;
+        cout<<"LHC7Tev  a1-a2 : "<<LHC7TeV.geta1()-LHC7TeV.geta2()<<endl;
+        cout<<"LHC2Tev  a1-a2 : "<<LHC2TeV.geta1()-LHC2TeV.geta2()<<endl;
+        cout<<"TEV      a1-a2 : "<<TEV.geta1D0()-TEV.geta2D0()<<endl;
         cout<<endl;
-        cout<<"LHC2Tev a3 : "<<LHC2TeV.geta3()<<endl;
-        cout<<"TEV     a3 : "<<TEV.geta3D0()<<endl;
+        cout<<"LHC13Tev a3 : "<<LHC13TeV.geta3()<<endl;
+        cout<<"LHC7Tev  a3 : "<<LHC7TeV.geta3()<<endl;
+        cout<<"LHC2Tev  a3 : "<<LHC2TeV.geta3()<<endl;
+        cout<<"TEV      a3 : "<<TEV.geta3D0()<<endl;
         cout<<endl;
-        cout<<"LHC2Tev a4 : "<<LHC2TeV.geta4()<<endl;
-        cout<<"TEV     a4 : "<<TEV.geta4D0()<<endl;
+        cout<<"LHC13Tev a4 : "<<LHC13TeV.geta4()<<endl;
+        cout<<"LHC7Tev  a4 : "<<LHC7TeV.geta4()<<endl;
+        cout<<"LHC2Tev  a4 : "<<LHC2TeV.geta4()<<endl;
+        cout<<"TEV      a4 : "<<TEV.geta4D0()<<endl;
         cout<<endl;
-        cout<<"LHC2Tev a5 : "<<LHC2TeV.geta5()<<endl;
-        cout<<"TEV     a5 : "<<TEV.geta5D0()<<endl;
+        cout<<"LHC13Tev a5 : "<<LHC13TeV.geta5()<<endl;
+        cout<<"LHC7Tev  a5 : "<<LHC7TeV.geta5()<<endl;
+        cout<<"LHC2Tev  a5 : "<<LHC2TeV.geta5()<<endl;
+        cout<<"TEV      a5 : "<<TEV.geta5D0()<<endl;
         cout<<endl;
 
         //Over

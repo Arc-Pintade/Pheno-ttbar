@@ -131,9 +131,10 @@ class FunctionAnalyze {
         void signalView(TString s, TString XX, double cmunu, int nbin, double nEventBkgd, double nEventTTbarSM);
         void signalHisto(TString s, TString XX, double cmunu, int nbin, double nEventTTbarSM);
 
-// To compare signal with energy
+// To compare signal with energy and use for stat
         TH1F* useHisto(TString s, TString XX, double cmunu, int maxTime, int timeStep, Color_t color);
         TH1F* useHistoD0(TString s, TString XX, double cmunu, int maxTime, int timeStep, Color_t color);
+        static TH1F* useConstHisto(TString s, double signal, int maxTime, int nbin);
 
 // Energy comparaison
         static void amplEnergy(TString s, TMatrixD m1, TMatrixD m2, TMatrixD m3, TMatrixD mT);

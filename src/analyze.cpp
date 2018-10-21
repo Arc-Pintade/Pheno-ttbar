@@ -247,7 +247,6 @@ double FunctionAnalyze::calculateCoefficent(int i, TMatrixD m){
 
 double FunctionAnalyze::calculateCoefficentD0(int i, TMatrixD m){
     double foo = 0;
-
     if(i==1)
         foo = (c1D0*c1D0*c2D0*c2D0 + s1D0*s1D0) * m(0,0) + (c1D0*c1D0*s2D0*s2D0) * m(2,2);
     else if(i==2)
@@ -334,6 +333,7 @@ void FunctionAnalyze::quadriHisto(TString s, double cmunu, int maxTime, int time
     legend->Draw();
 
     w->Update();
+    w->SaveAs("results/"+s+" f comparaison.png");
 }
 
 
@@ -406,6 +406,8 @@ void FunctionAnalyze::signalView(TString s, TString XX, double cmunu, int nbin, 
     legend->AddEntry(hSME,"Theoritical SME signal","l");
     legend->AddEntry(hAzimov,"Statistical errors","lep");
     legend->Draw();
+
+    c->SaveAs("results/"+s+" signal.png");
 }
 
 void FunctionAnalyze::signalHisto(TString s, TString XX, double cmunu, int nbin, double nEventTTbarSM){
@@ -457,25 +459,25 @@ TH1F* FunctionAnalyze::useHisto(TString s, TString XX, double cmunu, int maxTime
     TH1F* foo;
 
     if(XX=="XX" || XX=="YY"){
-        foo = new TH1F("c_{XX} = c_{YY}","", timeStep, 0, maxTime);
+        foo = new TH1F("c_{XX} = c_{YY} "+s,"", timeStep, 0, maxTime);
         for (int i=0; i<timeStep; i++) {
             foo->SetBinContent(i+1, fSME("XX", cmunu, i));
         }
     }
     else if(XX=="XY" || XX=="YX"){
-        foo = new TH1F("c_{XY} = c_{YX}","", timeStep, 0, maxTime);
+        foo = new TH1F("c_{XY} = c_{YX} "+s,"", timeStep, 0, maxTime);
         for (int i=0; i<timeStep; i++) {
             foo->SetBinContent(i+1, fSME("XY", cmunu, i));
         }
     }
     else if(XX=="XZ" || XX=="ZX"){
-        foo = new TH1F("c_{XZ} = c_{ZX}","", timeStep, 0, maxTime);
+        foo = new TH1F("c_{XZ} = c_{ZX} "+s,"", timeStep, 0, maxTime);
         for (int i=0; i<timeStep; i++) {
             foo->SetBinContent(i+1, fSME("XZ", cmunu, i));
         }
     }
     else if(XX=="YZ" || XX=="ZY"){
-        foo = new TH1F("c_{YZ} = c_{ZY}","", timeStep, 0, maxTime);
+        foo = new TH1F("c_{YZ} = c_{ZY} "+s,"", timeStep, 0, maxTime);
         for (int i=0; i<timeStep; i++) {
             foo->SetBinContent(i+1, fSME("YZ", cmunu, i));
         }
@@ -494,25 +496,25 @@ TH1F* FunctionAnalyze::useHistoD0(TString s, TString XX, double cmunu, int maxTi
     TH1F* foo;
 
     if(XX=="XX" || XX=="YY"){
-        foo = new TH1F("c_{XX} = c_{YY}","", timeStep, 0, maxTime);
+        foo = new TH1F("c_{XX} = c_{YY} "+s,"", timeStep, 0, maxTime);
         for (int i=0; i<timeStep; i++) {
             foo->SetBinContent(i+1, fSMED0("XX", cmunu, i));
         }
     }
     else if(XX=="XY" || XX=="YX"){
-        foo = new TH1F("c_{XY} = c_{YX}","", timeStep, 0, maxTime);
+        foo = new TH1F("c_{XY} = c_{YX} "+s,"", timeStep, 0, maxTime);
         for (int i=0; i<timeStep; i++) {
             foo->SetBinContent(i+1, fSMED0("XY", cmunu, i));
         }
     }
     else if(XX=="XZ" || XX=="ZX"){
-        foo = new TH1F("c_{XZ} = c_{ZX}","", timeStep, 0, maxTime);
+        foo = new TH1F("c_{XZ} = c_{ZX} "+s,"", timeStep, 0, maxTime);
         for (int i=0; i<timeStep; i++) {
             foo->SetBinContent(i+1, fSMED0("XZ", cmunu, i));
         }
     }
     else if(XX=="YZ" || XX=="ZY"){
-        foo = new TH1F("c_{YZ} = c_{ZY}","", timeStep, 0, maxTime);
+        foo = new TH1F("c_{YZ} = c_{ZY} "+s,"", timeStep, 0, maxTime);
         for (int i=0; i<timeStep; i++) {
             foo->SetBinContent(i+1, fSMED0("YZ", cmunu, i));
         }
@@ -527,6 +529,13 @@ TH1F* FunctionAnalyze::useHistoD0(TString s, TString XX, double cmunu, int maxTi
 }
 
 //________________ statics functions _________________//
+
+TH1F* FunctionAnalyze::useConstHisto(TString s, double signal, int maxTime, int nbin){
+    TH1F* foo = new TH1F(s,s,nbin,0,maxTime);
+    for (int i=0; i<nbin; i++) 
+        foo->SetBinContent(i+1,signal/((double)nbin));
+    return foo;
+}
 
 void FunctionAnalyze::amplEnergy(TString s, TMatrixD m1, TMatrixD m2, TMatrixD m3, TMatrixD mT){
     TCanvas* w = new TCanvas("Amplitude = f(Energy)"+s,"",200,10,800,600);
@@ -555,6 +564,8 @@ void FunctionAnalyze::amplEnergy(TString s, TMatrixD m1, TMatrixD m2, TMatrixD m
 
     w->Update();
     w->BuildLegend();
+
+    w->SaveAs("results/"+s+" A matrices comparaison.png");
 }
 
 void FunctionAnalyze::fatHisto(TString s, TH1F* h1, TH1F* h2, TH1F* h3, TH1F* h4){
@@ -575,5 +586,7 @@ void FunctionAnalyze::fatHisto(TString s, TH1F* h1, TH1F* h2, TH1F* h3, TH1F* h4
     legend->AddEntry(h3,"LHC 2TeV ","l");
     legend->AddEntry(h4,"Tevatron ","l");
     legend->Draw();
+
+    w->SaveAs("results/"+s+" energy comparaison.png");
 }
 
