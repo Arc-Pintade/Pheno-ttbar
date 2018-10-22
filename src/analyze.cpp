@@ -407,7 +407,7 @@ void FunctionAnalyze::signalView(TString s, TString XX, double cmunu, int nbin, 
     legend->AddEntry(hAzimov,"Statistical errors","lep");
     legend->Draw();
 
-    c->SaveAs("results/"+s+" signal.png");
+    c->SaveAs("results/"+s+XX+" signal.png");
 }
 
 void FunctionAnalyze::signalHisto(TString s, TString XX, double cmunu, int nbin, double nEventTTbarSM){
