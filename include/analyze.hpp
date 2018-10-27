@@ -130,6 +130,7 @@ class FunctionAnalyze {
         void quadriHisto(TString s, double cmunu, int maxTime, int timeStep);
         void signalView(TString s, TString XX, double cmunu, int nbin, double nEventBkgd, double nEventTTbarSM);
         void signalHisto(TString s, TString XX, double cmunu, int nbin, double nEventTTbarSM);
+        void earthSignal(TString s, TString XX, double cmunu);
 
 // To compare signal with energy and use for stat
         TH1F* useHisto(TString s, TString XX, double cmunu, int maxTime, int timeStep, Color_t color);
@@ -139,6 +140,7 @@ class FunctionAnalyze {
 // Energy comparaison
         static void amplEnergy(TString s, TMatrixD m1, TMatrixD m2, TMatrixD m3, TMatrixD mT);
         static void fatHisto(TString s, TH1F* h1, TH1F* h2, TH1F* h3, TH1F* h4);
+        static void fatHistoSwitch(TString s, TH1F* h1, TH1F* h2);
 };
 
 

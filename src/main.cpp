@@ -196,6 +196,20 @@ int main(){
         cout<<"TEV      a5 : "<<TEV.geta5D0()<<endl;
         cout<<endl;
 
+        TH1F* h2XZTEVangle = LHC2TeV.useHistoD0("LHC 2TeV TEV angles", "XZ", cmunu, time, step, kMagenta);
+        TH1F* hTEVXZLHCangle = TEV.useHisto("TEV LHC angles", "XZ", cmunu, time, step, kGreen);
+        FunctionAnalyze::fatHistoSwitch("Switch", h2XZTEVangle, hTEVXZLHCangle);
+        FunctionAnalyze::fatHistoSwitch("Unswitch", h2XZ, hTEVXZ);
+
+        LHC13TeV.earthSignal("13TeV", "XX", cmunu);
+        LHC13TeV.earthSignal("13TeV", "XY", cmunu);
+        LHC13TeV.earthSignal("13TeV", "XZ", cmunu);
+        LHC13TeV.earthSignal("13TeV", "YZ", cmunu);
+        LHC2TeV.earthSignal("2TeV", "XX", cmunu);
+        LHC2TeV.earthSignal("2TeV", "XY", cmunu);
+        LHC2TeV.earthSignal("2TeV", "XZ", cmunu);
+        LHC2TeV.earthSignal("2TeV", "YZ", cmunu);
+
         //Over
         cout<<"End Bye Bro !"<<endl;
         app.Run();

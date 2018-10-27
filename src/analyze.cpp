@@ -11,6 +11,7 @@
 #include <TCanvas.h>
 #include <TLegend.h>
 #include <TH1F.h>
+#include <TH2F.h>
 
 using namespace std;
 
@@ -156,11 +157,11 @@ FunctionAnalyze::FunctionAnalyze(int nPqqbar_user, int nP2g_user, int nF_user, T
     a3              = calculateCoefficent(3, averageA);
     a4              = calculateCoefficent(4, averageA);
     a5              = calculateCoefficent(5, averageA);
-    a1D0            = calculateCoefficentD0(1, averageA);
-    a2D0            = calculateCoefficentD0(2, averageA);
-    a3D0            = calculateCoefficentD0(3, averageA);
-    a4D0            = calculateCoefficentD0(4, averageA);
-    a5D0            = calculateCoefficentD0(5, averageA);
+    a1D0            = calculateCoefficentD0(1, averageAD0);
+    a2D0            = calculateCoefficentD0(2, averageAD0);
+    a3D0            = calculateCoefficentD0(3, averageAD0);
+    a4D0            = calculateCoefficentD0(4, averageAD0);
+    a5D0            = calculateCoefficentD0(5, averageAD0);
 
 }
 
@@ -454,6 +455,51 @@ void FunctionAnalyze::signalHisto(TString s, TString XX, double cmunu, int nbin,
     legend->Draw();
 }
 
+void FunctionAnalyze::earthSignal(TString s, TString XX, double cmunu){
+
+    double pas = 1000;
+    double tmp = M_PI/pas;
+    double tmp2 = 2*(M_PI/pas);
+    double b1,b2,b3,b4,b5,arg1,arg2,b1b2;
+    TCanvas* c = new TCanvas("max f_{SME}(#lambda, #theta) "+s+" f"+XX,"Input"+s, 10,10,800,600);
+    TH2F* h = new TH2F(s+XX, "", pas, 0, M_PI, pas, 0, 2*M_PI);
+    for(int i = 0; i<pas; i++)
+        for(int j=0; j<pas; j++){
+
+            b1 = (sin(i*tmp)*sin(i*tmp)*sin(j*tmp2)*sin(j*tmp2) + cos(i*tmp)*cos(i*tmp)) * averageA(0,0) + (sin(i*tmp)*sin(i*tmp)*cos(j*tmp2)*cos(j*tmp2)) * averageA(2,2);
+            b2 = cos(j*tmp2)*cos(j*tmp2) * averageA(0,0) + sin(j*tmp2)*sin(j*tmp2) * averageA(2,2);
+            b1b2 = (b1-b2)/2;
+            b3 = sin(i*tmp)*cos(j*tmp2)*sin(j*tmp2) * (averageA(2,2) - averageA(0,0));
+            b4 = cos(i*tmp)*sin(i*tmp)*cos(j*tmp2)*cos(j*tmp2) * (averageA(2,2) - averageA(0,0));
+            b5 = cos(j*tmp2)*cos(i*tmp2)*sin(j*tmp2) * (averageA(2,2) - averageA(0,0));
+            arg1 = abs( atan(b3/b1b2)/(omega) );
+            arg2 = abs( atan(b3/b1b2)/(2*omega) );
+
+            if((b1-b2) != 0){
+                if(XX == "XX" || XX == "YY")
+                    h->SetBinContent(i+1, j+1, abs( 2*cmunu*(b1b2*cos(2*omega*arg2) + b3*sin(2*omega*arg2)) ) );
+                else if(XX == "XY" || XX == "YX")
+                    h->SetBinContent(i+1, j+1, abs( 2*cmunu*(b1b2*sin(2*omega*arg2) - b3*cos(2*omega*arg2)) ) );
+                else if(XX == "XZ" || XX == "ZX")
+                    h->SetBinContent(i+1, j+1, abs( 2*cmunu*(b4*cos(omega*arg1) + b5*sin(2*omega*arg1)) ) );
+                else if(XX == "YZ" || XX == "ZY")
+                    h->SetBinContent(i+1, j+1, abs( 2*cmunu*(b4*sin(omega*arg1) - b5*cos(2*omega*arg1)) ) );
+                else 
+                    cout<<"error TH2F"<<endl;
+            }
+        }
+
+    h->SetTitle("max(f_{SME}(#lambda, #theta)) "+s+" f"+XX);
+    h->GetYaxis()->SetTitle("Azimuth #theta (in rad)");
+    h->GetXaxis()->SetTitle("Latitude #lambda (in rad)");
+
+    h->Write();
+    h->Draw("colz");
+    h->SetStats(0);
+
+    c->SaveAs("results/"+s+" max f_{SME}(#lambda, #theta) "+XX+".png");
+}
+
 TH1F* FunctionAnalyze::useHisto(TString s, TString XX, double cmunu, int maxTime, int timeStep, Color_t color){
 //    TCanvas* w = new TCanvas("f functions histogram"+XX+s,"",200,10,800,600);
     TH1F* foo;
@@ -585,6 +631,26 @@ void FunctionAnalyze::fatHisto(TString s, TH1F* h1, TH1F* h2, TH1F* h3, TH1F* h4
     legend->AddEntry(h2,"LHC 7TeV ","l");
     legend->AddEntry(h3,"LHC 2TeV ","l");
     legend->AddEntry(h4,"Tevatron ","l");
+    legend->Draw();
+
+    w->SaveAs("results/"+s+" energy comparaison.png");
+}
+
+void FunctionAnalyze::fatHistoSwitch(TString s, TH1F* h1, TH1F* h2){
+    TCanvas* w = new TCanvas("fatHisto"+s,"",200,10,800,600);
+    h1->Draw();
+    h2->Draw("SAME");
+
+    h1->SetStats(0);
+    h1->SetMaximum(0.01);
+    h1->SetMinimum(-0.01);
+
+    w->Update();
+
+    TLegend* legend = new TLegend(0.1,0.7,0.48,0.9);
+    legend->SetHeader("f_{SME}(t) functions histogram switch angles "+s,"C"); // option "C" allows to center the header
+    legend->AddEntry(h1,"LHC 2TeV "+s,"l");
+    legend->AddEntry(h2,"Tevatron "+s,"l");
     legend->Draw();
 
     w->SaveAs("results/"+s+" energy comparaison.png");
