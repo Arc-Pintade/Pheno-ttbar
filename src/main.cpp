@@ -105,13 +105,13 @@ int main(){
         TMatrixD P2g        = FunctionAnalyze::readMatrix("13TeVCMSP2g");
 
         FunctionAnalyze LHC13TeV(nPqqbar, nP2g, nF, Pqqbar, P2g, F);
-        LHC13TeV.quadriHisto("LHC 13Tev", cmunu, time, step);
-        LHC13TeV.signalView("LHC 13TeV", "XX", cmunu, bin, Bkgd, TTbarSM);
-        LHC13TeV.signalView("LHC 13TeV", "XZ", cmunu, bin, Bkgd, TTbarSM);
-        TH1F* h13XX = LHC13TeV.useHisto("LHC 13TeV", "XX", cmunu, time, step, kRed);
-        TH1F* h13XY = LHC13TeV.useHisto("LHC 13TeV", "XY", cmunu, time, step, kRed);
-        TH1F* h13XZ = LHC13TeV.useHisto("LHC 13TeV", "XZ", cmunu, time, step, kRed);
-        TH1F* h13YZ = LHC13TeV.useHisto("LHC 13TeV", "YZ", cmunu, time, step, kRed);
+        LHC13TeV.quadriHisto("LHC13TeV", cmunu, time, step);
+        LHC13TeV.signalView("LHC13TeV", "XX", cmunu, bin, Bkgd, TTbarSM);
+        LHC13TeV.signalView("LHC13TeV", "XZ", cmunu, bin, Bkgd, TTbarSM);
+        TH1F* h13XX = LHC13TeV.useHisto("LHC13TeV", "XX", cmunu, time, step, kRed);
+        TH1F* h13XY = LHC13TeV.useHisto("LHC13TeV", "XY", cmunu, time, step, kRed);
+        TH1F* h13XZ = LHC13TeV.useHisto("LHC13TeV", "XZ", cmunu, time, step, kRed);
+        TH1F* h13YZ = LHC13TeV.useHisto("LHC13TeV", "YZ", cmunu, time, step, kRed);
 
         //LHC 7 TeV
 
@@ -124,11 +124,11 @@ int main(){
         P2g                 = FunctionAnalyze::readMatrix("7TeVCMSP2g");
 
         FunctionAnalyze LHC7TeV(nPqqbar, nP2g, nF, Pqqbar, P2g, F);
-        LHC7TeV.quadriHisto("LHC 7Tev", cmunu, time, step);
-        TH1F* h7XX = LHC7TeV.useHisto("LHC 7TeV", "XX", cmunu, time, step, kBlue);
-        TH1F* h7XY = LHC7TeV.useHisto("LHC 7TeV", "XY", cmunu, time, step, kBlue);
-        TH1F* h7XZ = LHC7TeV.useHisto("LHC 7TeV", "XZ", cmunu, time, step, kBlue);
-        TH1F* h7YZ = LHC7TeV.useHisto("LHC 7TeV", "YZ", cmunu, time, step, kBlue);
+        LHC7TeV.quadriHisto("LHC7TeV", cmunu, time, step);
+        TH1F* h7XX = LHC7TeV.useHisto("LHC7TeV", "XX", cmunu, time, step, kBlue);
+        TH1F* h7XY = LHC7TeV.useHisto("LHC7TeV", "XY", cmunu, time, step, kBlue);
+        TH1F* h7XZ = LHC7TeV.useHisto("LHC7TeV", "XZ", cmunu, time, step, kBlue);
+        TH1F* h7YZ = LHC7TeV.useHisto("LHC7TeV", "YZ", cmunu, time, step, kBlue);
 
         //LHC 2 TeV
 
@@ -141,11 +141,11 @@ int main(){
         P2g                 = FunctionAnalyze::readMatrix("2TeVCMSP2g");
 
         FunctionAnalyze LHC2TeV(nPqqbar, nP2g, nF, Pqqbar, P2g, F);
-        LHC2TeV.signalHisto("LHC 2TeV", "XX", cmunu, bin, TTbarSM);
-        TH1F* h2XX = LHC2TeV.useHisto("LHC 2TeV", "XX", cmunu, time, step, kMagenta);
-        TH1F* h2XY = LHC2TeV.useHisto("LHC 2TeV", "XY", cmunu, time, step, kMagenta);
-        TH1F* h2XZ = LHC2TeV.useHisto("LHC 2TeV", "XZ", cmunu, time, step, kMagenta);
-        TH1F* h2YZ = LHC2TeV.useHisto("LHC 2TeV", "YZ", cmunu, time, step, kMagenta);
+        LHC2TeV.signalHisto("LHC2TeV", "XX", cmunu, bin, TTbarSM);
+        TH1F* h2XX = LHC2TeV.useHisto("LHC2TeV", "XX", cmunu, time, step, kMagenta);
+        TH1F* h2XY = LHC2TeV.useHisto("LHC2TeV", "XY", cmunu, time, step, kMagenta);
+        TH1F* h2XZ = LHC2TeV.useHisto("LHC2TeV", "XZ", cmunu, time, step, kMagenta);
+        TH1F* h2YZ = LHC2TeV.useHisto("LHC2TeV", "YZ", cmunu, time, step, kMagenta);
 
         //Tevatron 2 TeV
 
@@ -158,7 +158,7 @@ int main(){
         P2g                 = FunctionAnalyze::readMatrix("TEVP2g");
 
         FunctionAnalyze TEV(nPqqbar, nP2g, nF, Pqqbar, P2g, F);
-        TEV.quadriHisto("LHC 7Tev", cmunu, time, step);
+        TEV.quadriHisto("TEV", cmunu, time, step);
         TH1F* hTEVXX = TEV.useHistoD0("TEV", "XX", cmunu, time, step, kGreen);
         TH1F* hTEVXY = TEV.useHistoD0("TEV", "XY", cmunu, time, step, kGreen);
         TH1F* hTEVXZ = TEV.useHistoD0("TEV", "XZ", cmunu, time, step, kGreen);
@@ -169,35 +169,35 @@ int main(){
         FunctionAnalyze::fatHisto("f^{XZ}", h13XZ, h7XZ, h2XZ, hTEVXZ);
         FunctionAnalyze::fatHisto("f^{YZ}", h13YZ, h7YZ, h2YZ, hTEVYZ);
 
-        FunctionAnalyze::amplEnergy(" decay", LHC2TeV.getAverageF(), LHC7TeV.getAverageF(), LHC13TeV.getAverageF(), TEV.getAverageF());
-        FunctionAnalyze::amplEnergy(" q#bar{q}", LHC2TeV.getAveragePqqbar(), LHC7TeV.getAveragePqqbar(), LHC13TeV.getAveragePqqbar(), TEV.getAveragePqqbar());
-        FunctionAnalyze::amplEnergy(" gluglu", LHC2TeV.getAverageP2g(), LHC7TeV.getAverageP2g(), LHC13TeV.getAverageP2g(), TEV.getAverageP2g());
+        FunctionAnalyze::amplEnergy("decay", LHC2TeV.getAverageF(), LHC7TeV.getAverageF(), LHC13TeV.getAverageF(), TEV.getAverageF());
+        FunctionAnalyze::amplEnergy("q#bar{q}", LHC2TeV.getAveragePqqbar(), LHC7TeV.getAveragePqqbar(), LHC13TeV.getAveragePqqbar(), TEV.getAveragePqqbar());
+        FunctionAnalyze::amplEnergy("gluglu", LHC2TeV.getAverageP2g(), LHC7TeV.getAverageP2g(), LHC13TeV.getAverageP2g(), TEV.getAverageP2g());
         FunctionAnalyze::amplEnergy("", LHC2TeV.getAverageA(), LHC7TeV.getAverageA(), LHC13TeV.getAverageA(), TEV.getAverageAD0());
 
         cout<<endl;
-        cout<<"LHC13Tev a1-a2 : "<<LHC13TeV.geta1()-LHC13TeV.geta2()<<endl;
-        cout<<"LHC7Tev  a1-a2 : "<<LHC7TeV.geta1()-LHC7TeV.geta2()<<endl;
-        cout<<"LHC2Tev  a1-a2 : "<<LHC2TeV.geta1()-LHC2TeV.geta2()<<endl;
+        cout<<"LHC13TeV a1-a2 : "<<LHC13TeV.geta1()-LHC13TeV.geta2()<<endl;
+        cout<<"LHC7TeV  a1-a2 : "<<LHC7TeV.geta1()-LHC7TeV.geta2()<<endl;
+        cout<<"LHC2TeV  a1-a2 : "<<LHC2TeV.geta1()-LHC2TeV.geta2()<<endl;
         cout<<"TEV      a1-a2 : "<<TEV.geta1D0()-TEV.geta2D0()<<endl;
         cout<<endl;
-        cout<<"LHC13Tev a3 : "<<LHC13TeV.geta3()<<endl;
-        cout<<"LHC7Tev  a3 : "<<LHC7TeV.geta3()<<endl;
-        cout<<"LHC2Tev  a3 : "<<LHC2TeV.geta3()<<endl;
+        cout<<"LHC13TeV a3 : "<<LHC13TeV.geta3()<<endl;
+        cout<<"LHC7TeV  a3 : "<<LHC7TeV.geta3()<<endl;
+        cout<<"LHC2TeV  a3 : "<<LHC2TeV.geta3()<<endl;
         cout<<"TEV      a3 : "<<TEV.geta3D0()<<endl;
         cout<<endl;
-        cout<<"LHC13Tev a4 : "<<LHC13TeV.geta4()<<endl;
-        cout<<"LHC7Tev  a4 : "<<LHC7TeV.geta4()<<endl;
-        cout<<"LHC2Tev  a4 : "<<LHC2TeV.geta4()<<endl;
+        cout<<"LHC13TeV a4 : "<<LHC13TeV.geta4()<<endl;
+        cout<<"LHC7TeV  a4 : "<<LHC7TeV.geta4()<<endl;
+        cout<<"LHC2TeV  a4 : "<<LHC2TeV.geta4()<<endl;
         cout<<"TEV      a4 : "<<TEV.geta4D0()<<endl;
         cout<<endl;
-        cout<<"LHC13Tev a5 : "<<LHC13TeV.geta5()<<endl;
-        cout<<"LHC7Tev  a5 : "<<LHC7TeV.geta5()<<endl;
-        cout<<"LHC2Tev  a5 : "<<LHC2TeV.geta5()<<endl;
+        cout<<"LHC13TeV a5 : "<<LHC13TeV.geta5()<<endl;
+        cout<<"LHC7TeV  a5 : "<<LHC7TeV.geta5()<<endl;
+        cout<<"LHC2TeV  a5 : "<<LHC2TeV.geta5()<<endl;
         cout<<"TEV      a5 : "<<TEV.geta5D0()<<endl;
         cout<<endl;
 
-        TH1F* h2XZTEVangle = LHC2TeV.useHistoD0("LHC 2TeV TEV angles", "XZ", cmunu, time, step, kMagenta);
-        TH1F* hTEVXZLHCangle = TEV.useHisto("TEV LHC angles", "XZ", cmunu, time, step, kGreen);
+        TH1F* h2XZTEVangle = LHC2TeV.useHistoD0("LHC2TeVTEVangles", "XZ", cmunu, time, step, kMagenta);
+        TH1F* hTEVXZLHCangle = TEV.useHisto("TEVLHCangles", "XZ", cmunu, time, step, kGreen);
         FunctionAnalyze::fatHistoSwitch("Switch", h2XZTEVangle, hTEVXZLHCangle);
         FunctionAnalyze::fatHistoSwitch("Unswitch", h2XZ, hTEVXZ);
 
@@ -206,9 +206,6 @@ int main(){
         LHC13TeV.earthSignal("13TeV", "XZ", cmunu);
         LHC13TeV.earthSignal("13TeV", "YZ", cmunu);
         LHC2TeV.earthSignal("2TeV", "XX", cmunu);
-        LHC2TeV.earthSignal("2TeV", "XY", cmunu);
-        LHC2TeV.earthSignal("2TeV", "XZ", cmunu);
-        LHC2TeV.earthSignal("2TeV", "YZ", cmunu);
 
         //Over
         cout<<"End Bye Bro !"<<endl;

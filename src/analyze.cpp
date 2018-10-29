@@ -215,13 +215,13 @@ int FunctionAnalyze::readNumber(string s){
 // Matrix A
 TMatrixD FunctionAnalyze::calculateAverageMatrixA(TMatrixD Pqqbar, TMatrixD P2g, TMatrixD F, int nP1, int nP2, int n){
     TMatrixD foo(4,4);
-    foo = ((double)nP1 / (double)n) * Pqqbar + ((double)nP2 / (double)n) * P2g + F;
+    foo = ((double)nP1 / (double)n) * 0.5*Pqqbar + ((double)nP2 / (double)n) * 0.5*P2g + F;
     return foo;
 }
 
 TMatrixD FunctionAnalyze::calculateAverageMatrixAD0(TMatrixD Pqqbar, TMatrixD F){
     TMatrixD foo(4,4);
-    foo = Pqqbar + F;
+    foo = 0.5*Pqqbar + F;
     return foo;
 }
 
@@ -334,7 +334,7 @@ void FunctionAnalyze::quadriHisto(TString s, double cmunu, int maxTime, int time
     legend->Draw();
 
     w->Update();
-    w->SaveAs("results/"+s+" f comparaison.png");
+    w->SaveAs("results/"+s+"fComparaison.png");
 }
 
 
@@ -408,7 +408,7 @@ void FunctionAnalyze::signalView(TString s, TString XX, double cmunu, int nbin, 
     legend->AddEntry(hAzimov,"Statistical errors","lep");
     legend->Draw();
 
-    c->SaveAs("results/"+s+XX+" signal.png");
+    c->SaveAs("results/"+s+XX+"signal.png");
 }
 
 void FunctionAnalyze::signalHisto(TString s, TString XX, double cmunu, int nbin, double nEventTTbarSM){
@@ -497,7 +497,7 @@ void FunctionAnalyze::earthSignal(TString s, TString XX, double cmunu){
     h->Draw("colz");
     h->SetStats(0);
 
-    c->SaveAs("results/"+s+" max f_{SME}(#lambda, #theta) "+XX+".png");
+    c->SaveAs("results/"+s+"maxf_{SME}(lambda,theta)"+XX+".png");
 }
 
 TH1F* FunctionAnalyze::useHisto(TString s, TString XX, double cmunu, int maxTime, int timeStep, Color_t color){
@@ -611,7 +611,7 @@ void FunctionAnalyze::amplEnergy(TString s, TMatrixD m1, TMatrixD m2, TMatrixD m
     w->Update();
     w->BuildLegend();
 
-    w->SaveAs("results/"+s+" A matrices comparaison.png");
+    w->SaveAs("results/"+s+"AmatricesComparaison.png");
 }
 
 void FunctionAnalyze::fatHisto(TString s, TH1F* h1, TH1F* h2, TH1F* h3, TH1F* h4){
@@ -633,7 +633,7 @@ void FunctionAnalyze::fatHisto(TString s, TH1F* h1, TH1F* h2, TH1F* h3, TH1F* h4
     legend->AddEntry(h4,"Tevatron ","l");
     legend->Draw();
 
-    w->SaveAs("results/"+s+" energy comparaison.png");
+    w->SaveAs("results/"+s+"energyComparaison.png");
 }
 
 void FunctionAnalyze::fatHistoSwitch(TString s, TH1F* h1, TH1F* h2){
@@ -642,8 +642,8 @@ void FunctionAnalyze::fatHistoSwitch(TString s, TH1F* h1, TH1F* h2){
     h2->Draw("SAME");
 
     h1->SetStats(0);
-    h1->SetMaximum(0.01);
-    h1->SetMinimum(-0.01);
+    h1->SetMaximum(0.02);
+    h1->SetMinimum(-0.02);
 
     w->Update();
 
@@ -653,6 +653,6 @@ void FunctionAnalyze::fatHistoSwitch(TString s, TH1F* h1, TH1F* h2){
     legend->AddEntry(h2,"Tevatron "+s,"l");
     legend->Draw();
 
-    w->SaveAs("results/"+s+" energy comparaison.png");
+    w->SaveAs("results/"+s+"energyComparaison.png");
 }
 
